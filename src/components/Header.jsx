@@ -1,61 +1,62 @@
 import { Settings, Sparkles, FolderOpen, Cpu, Sun, Moon } from 'lucide-react';
+import './Header.css';
 
-export default function Header({ isDark, activeTab, setActiveTab, toggleTheme, titleColor, mutedText, navWrapBg, navActive, navInactive }) {
+export default function Header({ isDark, activeTab, setActiveTab, toggleTheme }) {
   return (
-    <header className={`relative z-10 backdrop-blur-xl border-b sticky top-0 transition-colors duration-500 ${isDark ? 'bg-slate-900/60 border-white/5' : 'bg-white/70 border-slate-200'}`}>
-      <div className="w-full px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-3 mx-auto" style={{ maxWidth: '1280px' }}>
-        <div className="flex items-center gap-2 sm:gap-3 min-w-0">
-          <div className="bg-gradient-to-br from-cyan-500 to-indigo-600 p-2 sm:p-2.5 rounded-xl shadow-[0_0_15px_rgba(6,182,212,0.4)] transition-transform duration-300 hover:scale-105 hover:rotate-6 flex-shrink-0">
-            <Cpu className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
+    <header className={`header ${isDark ? 'header--dark' : 'header--light'}`}>
+      <div className="header__container">
+        <div className="header__brand">
+          <div className="header__icon-box">
+            <Cpu className="header__icon" />
           </div>
-          <div className="min-w-0">
-            <h1 className={`text-lg sm:text-xl lg:text-2xl font-bold tracking-tight flex items-center gap-2 truncate ${titleColor}`}>
-              Prompt<span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-indigo-400">Genius</span>
+          <div className="header__title-group">
+            <h1 className="header__title">
+              Prompt<span className="header__title-gradient">Genius</span>
             </h1>
-            <p className={`text-[10px] sm:text-xs font-medium tracking-wider hidden sm:block truncate ${mutedText}`}>AI LANDING PAGE ENGINE</p>
+            <p className="header__subtitle">AI LANDING PAGE ENGINE</p>
           </div>
         </div>
 
-        <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
-          <nav className={`hidden md:flex gap-2 p-1.5 rounded-xl border transition-colors duration-500 ${navWrapBg}`}>
+        <div className="header__actions">
+          <nav className="header__nav-desktop">
             <button
               onClick={() => setActiveTab('form')}
-              className={`px-3 lg:px-5 py-2 text-xs lg:text-sm font-semibold rounded-lg transition-all duration-300 flex items-center gap-1.5 lg:gap-2 ${activeTab === 'form' ? navActive + ' border' : navInactive}`}
+              className={`header__nav-btn ${activeTab === 'form' ? 'header__nav-btn--active' : ''}`}
             >
-              <Settings className="w-4 h-4"/> Configurador
+              <Settings style={{ width: '1rem', height: '1rem' }} /> Configurador
             </button>
             <button
               onClick={() => setActiveTab('prompt')}
-              className={`px-3 lg:px-5 py-2 text-xs lg:text-sm font-semibold rounded-lg transition-all duration-300 flex items-center gap-1.5 lg:gap-2 ${activeTab === 'prompt' ? navActive + ' border' : navInactive}`}
+              className={`header__nav-btn ${activeTab === 'prompt' ? 'header__nav-btn--active' : ''}`}
             >
-              <Sparkles className="w-4 h-4"/> Output Gerado
+              <Sparkles style={{ width: '1rem', height: '1rem' }} /> Output Gerado
             </button>
             <button
               onClick={() => setActiveTab('saved')}
-              className={`px-3 lg:px-5 py-2 text-xs lg:text-sm font-semibold rounded-lg transition-all duration-300 flex items-center gap-1.5 lg:gap-2 ${activeTab === 'saved' ? navActive + ' border' : navInactive}`}
+              className={`header__nav-btn ${activeTab === 'saved' ? 'header__nav-btn--active' : ''}`}
             >
-              <FolderOpen className="w-4 h-4"/> Projetos
+              <FolderOpen style={{ width: '1rem', height: '1rem' }} /> Projetos
             </button>
           </nav>
 
           <button
             onClick={toggleTheme}
             aria-label="Alternar tema"
-            className={`relative w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center rounded-xl border transition-all duration-300 hover:scale-105 active:scale-95 ${isDark ? 'border-white/10 bg-slate-800/60 text-amber-300 hover:bg-slate-800' : 'border-slate-200 bg-white text-indigo-500 hover:bg-slate-100 shadow-sm'}`}
+            className="header__theme-toggle"
             title={isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro'}
           >
-            <span className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`}>
-              <Moon className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className={`header__icon-wrapper ${isDark ? 'header__icon-wrapper--visible-moon' : 'header__icon-wrapper--hidden-moon'}`}>
+              <Moon style={{ width: '1.25rem', height: '1.25rem' }} />
             </span>
-            <span className={`absolute inset-0 flex items-center justify-center transition-all duration-300 ${!isDark ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 rotate-90 scale-50'}`}>
-              <Sun className="w-4 h-4 sm:w-5 sm:h-5" />
+            <span className={`header__icon-wrapper ${!isDark ? 'header__icon-wrapper--visible-sun' : 'header__icon-wrapper--hidden-sun'}`}>
+              <Sun style={{ width: '1.25rem', height: '1.25rem' }} />
             </span>
           </button>
         </div>
       </div>
 
       {/* Nav mobile */}
-      <div className={`md:hidden flex gap-1 px-4 pb-2 sm:pb-3 border-t transition-colors duration-500 ${isDark ? 'border-white/5' : 'border-slate-200'}`}>
+      <div className="header__nav-mobile">
         {[
           { key: 'form', label: 'Config', icon: Settings },
           { key: 'prompt', label: 'Output', icon: Sparkles },
@@ -64,9 +65,9 @@ export default function Header({ isDark, activeTab, setActiveTab, toggleTheme, t
           <button
             key={key}
             onClick={() => setActiveTab(key)}
-            className={`flex-1 mt-2 py-2 text-xs font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-1.5 ${activeTab === key ? navActive + ' border' : navInactive}`}
+            className={`header__nav-mobile-btn ${activeTab === key ? 'header__nav-mobile-btn--active' : ''}`}
           >
-            <Icon className="w-3.5 h-3.5" /> {label}
+            <Icon style={{ width: '0.875rem', height: '0.875rem' }} /> {label}
           </button>
         ))}
       </div>

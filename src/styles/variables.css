@@ -1,0 +1,86 @@
+:root {
+  /* Colors - Slate */
+  --color-slate-50: #f8fafc;
+  --color-slate-100: #f1f5f9;
+  --color-slate-200: #e2e8f0;
+  --color-slate-300: #cbd5e1;
+  --color-slate-400: #94a3b8;
+  --color-slate-500: #64748b;
+  --color-slate-600: #475569;
+  --color-slate-700: #334155;
+  --color-slate-800: #1e293b;
+  --color-slate-900: #0f172a;
+  --color-slate-950: #020617;
+
+  /* Colors - Cyan */
+  --color-cyan-50: #ecfeff;
+  --color-cyan-300: #67e8f9;
+  --color-cyan-400: #22d3ee;
+  --color-cyan-500: #06b6d4;
+  --color-cyan-600: #0891b2;
+  --color-cyan-900: #164e63;
+  --color-cyan-950: #083344;
+
+  /* Colors - Indigo */
+  --color-indigo-50: #eef2ff;
+  --color-indigo-200: #c7d2fe;
+  --color-indigo-300: #a5b4fc;
+  --color-indigo-400: #818cf8;
+  --color-indigo-500: #6366f1;
+  --color-indigo-600: #4f46e5;
+  --color-indigo-950: #1e1b4b;
+
+  /* Colors - Purple */
+  --color-purple-400: #c084fc;
+  --color-purple-600: #9333ea;
+
+  /* Colors - Utility */
+  --color-emerald-500: #10b981;
+  --color-amber-300: #fcd34d;
+  --color-rose-50: #fff1f2;
+  --color-rose-400: #fb7185;
+  --color-rose-500: #f43f5e;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Spacing */
+  --spacing-0: 0px;
+  --spacing-0-5: 0.125rem;
+  --spacing-1: 0.25rem;
+  --spacing-1-5: 0.375rem;
+  --spacing-2: 0.5rem;
+  --spacing-2-5: 0.625rem;
+  --spacing-3: 0.75rem;
+  --spacing-3-5: 0.875rem;
+  --spacing-4: 1rem;
+  --spacing-5: 1.25rem;
+  --spacing-6: 1.5rem;
+  --spacing-8: 2rem;
+  --spacing-10: 2.5rem;
+
+  /* Border Radius */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+  --radius-full: 9999px;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+
+  /* Transitions */
+  --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-colors: background-color 0.5s ease, border-color 0.5s ease, color 0.5s ease;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-cyan-glow: 0 0 15px rgba(6, 182, 212, 0.4);
+  --shadow-cyan-button: 0 0 25px rgba(6, 182, 212, 0.3);
+  --shadow-indigo-button: 0 0 35px rgba(99, 102, 241, 0.5);
+  --shadow-emerald-glow: 0 0 15px rgba(16, 185, 129, 0.4);
+}
