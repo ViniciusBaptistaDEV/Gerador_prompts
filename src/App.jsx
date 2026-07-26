@@ -3,6 +3,7 @@ import Header from './components/Header';
 import FormTab from './components/FormTab';
 import PromptOutputTab from './components/PromptOutputTab';
 import SavedProjectsTab from './components/SavedProjectsTab';
+import AlertModal from './components/AlertModal';
 import './App.css';
 
 function App() {
@@ -14,12 +15,13 @@ function App() {
     generatedPrompt,
     mounted,
     formData,
+    alertState,
+    hideAlert,
     setActiveTab,
     toggleTheme,
     handleInputChange,
     handleGenerate,
     handleCopy,
-    handleSaveProject,
     loadProject,
     deleteProject,
     updateProject,
@@ -27,6 +29,13 @@ function App() {
 
   return (
     <div className={`app ${isDark ? 'app--dark' : 'app--light'}`}>
+
+      {/* Modal de Alerta Futurista com Laser Scan */}
+      <AlertModal
+        isDark={isDark}
+        alertState={alertState}
+        onClose={hideAlert}
+      />
 
       {/* Elementos de Fundo Futuristas */}
       <div className="app__bg-effects">

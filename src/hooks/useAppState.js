@@ -47,6 +47,48 @@ export default function useAppState() {
   const [mounted] = useState(true);
   const [formData, setFormData] = useState(initialFormData);
 
+  // Estado para Modal de Alerta Futurista
+  const [alertState, setAlertState] = useState({
+    isOpen: false,
+    title: '',
+    message: '',
+    type: 'info',
+    showCancel: false,
+    confirmText: 'Entendido',
+    cancelText: 'Cancelar',
+    onConfirm: null,
+  });
+
+  const hideAlert = useCallback(() => {
+    setAlertState(prev => ({ ...prev, isOpen: false }));
+  }, []);
+
+  const showAlert = useCallback((message, type = 'info', title = '', confirmText = 'Entendido') => {
+    setAlertState({
+      isOpen: true,
+      title,
+      message,
+      type,
+      showCancel: false,
+      confirmText,
+      cancelText: 'Cancelar',
+      onConfirm: null,
+    });
+  }, []);
+
+  const showConfirm = useCallback((message, onConfirm, title = 'Confirmação', confirmText = 'Confirmar Exclusão', cancelText = 'Cancelar') => {
+    setAlertState({
+      isOpen: true,
+      title,
+      message,
+      type: 'confirm',
+      showCancel: true,
+      confirmText,
+      cancelText,
+      onConfirm,
+    });
+  }, []);
+
   const isDark = theme === 'dark';
 
   const toggleTheme = useCallback(() => {
@@ -62,12 +104,20 @@ export default function useAppState() {
 
   const handleGenerate = useCallback(() => {
     if (!formData.sector || !formData.companyName || !formData.address || !formData.hours) {
-      alert("Preencha os campos obrigatórios (Área, Nome, Endereço e Horário) para gerar um prompt de alta qualidade.");
+      showAlert(
+        "Preencha os campos obrigatórios (Área, Nome, Endereço e Horário) para gerar um prompt de alta qualidade.",
+        "warning",
+        "Campos Obrigatórios"
+      );
       return;
     }
 
     if (formData.sector === 'outro' && !formData.customSector.trim()) {
-      alert("Por favor, digite qual é o segmento/área de atuação do cliente.");
+      showAlert(
+        "Por favor, digite qual é o segmento/área de atuação do cliente.",
+        "warning",
+        "Segmento Ausente"
+      );
       return;
     }
 
@@ -237,7 +287,6 @@ Lembre-se: Entregue o código completo e funcional do projeto em React + Vanilla
     };
 
     setSavedProjects(prev => {
-      // Evita duplicatas exatas mantendo o mais recente no topo
       const filtered = prev.filter(p => p.name.toLowerCase() !== formData.companyName.toLowerCase());
       const updated = [newProject, ...filtered];
       localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
@@ -248,7 +297,7 @@ Lembre-se: Entregue o código completo e funcional do projeto em React + Vanilla
     setFormData(initialFormData);
 
     setActiveTab('prompt');
-  }, [formData]);
+  }, [formData, showAlert]);
 
   const handleCopy = useCallback(async () => {
     if (!generatedPrompt) return;
@@ -257,17 +306,17 @@ Lembre-se: Entregue o código completo e funcional do projeto em React + Vanilla
       setCopyStatus(true);
       setTimeout(() => setCopyStatus(false), 2000);
     } catch {
-      alert('Falha ao copiar. Selecione o texto e copie manualmente.');
+      showAlert('Falha ao copiar. Selecione o texto e copie manualmente.', 'error', 'Erro ao Copiar');
     }
-  }, [generatedPrompt]);
+  }, [generatedPrompt, showAlert]);
 
   const handleSaveProject = useCallback(() => {
     if (!formData.companyName || !generatedPrompt) {
-      alert("Gere um prompt primeiro para poder salvar o projeto.");
+      showAlert("Gere um prompt primeiro para poder salvar o projeto.", "warning", "Prompt Não Gerado");
       return;
     }
-    alert('Projeto já armazenado com sucesso no seu histórico de projetos!');
-  }, [formData.companyName, generatedPrompt]);
+    showAlert('Projeto já armazenado com sucesso no seu histórico de projetos!', 'success', 'Projeto Armazenado');
+  }, [formData.companyName, generatedPrompt, showAlert]);
 
   const loadProject = useCallback((project) => {
     setFormData(project.data);
@@ -276,14 +325,19 @@ Lembre-se: Entregue o código completo e funcional do projeto em React + Vanilla
   }, []);
 
   const deleteProject = useCallback((id) => {
-    if (window.confirm('Tem certeza que deseja excluir este projeto salvo?')) {
-      setSavedProjects(prev => {
-        const updated = prev.filter(p => p.id !== id);
-        localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
-        return updated;
-      });
-    }
-  }, []);
+    showConfirm(
+      'Tem certeza que deseja excluir este projeto do seu histórico de projetos salvas?',
+      () => {
+        setSavedProjects(prev => {
+          const updated = prev.filter(p => p.id !== id);
+          localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
+          return updated;
+        });
+      },
+      'Excluir Projeto',
+      'Confirmar Exclusão'
+    );
+  }, [showConfirm]);
 
   const updateProject = useCallback((id, updatedFields) => {
     setSavedProjects(prev => {
@@ -303,6 +357,7 @@ Lembre-se: Entregue o código completo e funcional do projeto em React + Vanilla
     generatedPrompt,
     mounted,
     formData,
+    alertState,
     // Actions
     setActiveTab,
     toggleTheme,
@@ -313,5 +368,8 @@ Lembre-se: Entregue o código completo e funcional do projeto em React + Vanilla
     loadProject,
     deleteProject,
     updateProject,
+    showAlert,
+    showConfirm,
+    hideAlert
   };
 }

@@ -255,7 +255,7 @@ export default function FormTab({
             className="form-tab__submit-btn"
           >
             <Rocket style={{ width: '1.5rem', height: '1.5rem', flexShrink: 0 }} />
-            Sintetizar Prompt Mestre
+            Gerar Prompt Final
           </button>
         </div>
 
