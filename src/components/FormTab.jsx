@@ -229,14 +229,14 @@ export default function FormTab({
                 <div>
                   <p className="form-tab__webhook-info-title">Payload Rigoroso Ativado</p>
                   <p className="form-tab__webhook-info-text">
-                    A IA será instruída a criar os inputs adequados, incluindo o Select de "Momento" com os options exatos informados. O formulário enviará um POST para a URL acima com a seguinte estrutura JSON:
+                    A IA será instruída a criar os inputs adequados, incluindo o Select de "Momento" com a pergunta e opções personalizadas para o segmento do cliente. O formulário enviará um POST para a URL acima com a seguinte estrutura JSON:
                   </p>
                   <pre className="form-tab__code-preview">
 {`{
   "nome": "string",
   "email": "string",
   "whatsapp": "string",
-  "momento": "presenca-digital | captacao-leads | ...",
+  "momento": "slug_opção_relacionada_ao_nicho",
   "mensagem": "string",
   "origem": "hostname",
   "data_envio": "DD/MM/YYYY, HH:MM:SS",

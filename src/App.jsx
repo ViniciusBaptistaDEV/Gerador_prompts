@@ -22,6 +22,7 @@ function App() {
     handleSaveProject,
     loadProject,
     deleteProject,
+    updateProject,
   } = useAppState();
 
   return (
@@ -61,7 +62,6 @@ function App() {
             isDark={isDark}
             generatedPrompt={generatedPrompt}
             handleCopy={handleCopy}
-            handleSaveProject={handleSaveProject}
             copyStatus={copyStatus}
           />
         )}
@@ -73,6 +73,7 @@ function App() {
             savedProjects={savedProjects}
             loadProject={loadProject}
             deleteProject={deleteProject}
+            updateProject={updateProject}
           />
         )}
       </main>

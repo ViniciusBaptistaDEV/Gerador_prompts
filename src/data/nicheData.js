@@ -8,6 +8,13 @@ const NICHE_DATA = {
     cta: 'Falar com um Advogado Especialista',
     services: 'Consultoria jurídica preventiva corporativa, Representação em litígios de alta complexidade, Elaboração e revisão de contratos, Defesa em processos administrativos e judiciais.',
     tone: 'Altamente formal, culto, transmitindo altíssima credibilidade, segurança, sigilo e autoridade técnica imponente.',
+    momentoLabel: 'Qual a sua necessidade ou assunto jurídico principal no momento?',
+    momentoOptions: [
+      { label: 'Preciso de auxílio ou defesa em um processo ativo', value: 'defesa-processo' },
+      { label: 'Quero consultoria jurídica preventiva ou elaboração de contratos', value: 'consultoria-contratos' },
+      { label: 'Preciso tirar dúvidas e entender meus direitos', value: 'duvidas-direitos' },
+      { label: 'Outro assunto jurídico', value: 'outros' }
+    ]
   },
   arquitetura: {
     name: 'Arquitetura e Interiores',
@@ -17,6 +24,13 @@ const NICHE_DATA = {
     cta: 'Solicitar Orçamento de Projeto',
     services: 'Projetos arquitetônicos residenciais e comerciais de alto padrão, Design de interiores de luxo, Acompanhamento e gerenciamento rigoroso de obras, Consultoria de decoração.',
     tone: 'Sofisticado, inspirador, minimalista, focado em estética sublime, exclusividade e funcionalidade moderna.',
+    momentoLabel: 'Qual o tipo de projeto você precisa no momento?',
+    momentoOptions: [
+      { label: 'Projeto Arquitetônico do Zero (Residencial / Comercial)', value: 'projeto-arquitetonico' },
+      { label: 'Design de Interiores e Reforma de Alto Padrão', value: 'design-interiores' },
+      { label: 'Gerenciamento e Acompanhamento Completo de Obra', value: 'gerenciamento-obra' },
+      { label: 'Outro tipo de projeto', value: 'outros' }
+    ]
   },
   engenharia: {
     name: 'Engenharia / Construtora',
@@ -26,6 +40,13 @@ const NICHE_DATA = {
     cta: 'Falar com um Engenheiro Responsável',
     services: 'Cálculo estrutural avançado, Execução de obras civis e industriais, Projetos elétricos e hidrossanitários, Laudos e perícias técnicas especializadas.',
     tone: 'Técnico, direto, focado fortemente em segurança estrutural, eficiência de custos, durabilidade e cumprimento de cronogramas.',
+    momentoLabel: 'Qual a necessidade da sua obra ou empresa no momento?',
+    momentoOptions: [
+      { label: 'Cálculo Estrutural ou Projetos de Engenharia', value: 'calculo-estrutural' },
+      { label: 'Execução de Obra Civil ou Industrial', value: 'execucao-obra' },
+      { label: 'Laudo Técnico, Perícia ou Regularização', value: 'laudo-tecnico' },
+      { label: 'Outro serviço de engenharia', value: 'outros' }
+    ]
   },
   industria: {
     name: 'Indústria / Manufatura',
@@ -35,6 +56,13 @@ const NICHE_DATA = {
     cta: 'Solicitar Cotação Industrial',
     services: 'Fabricação de peças usinadas sob medida, Manutenção preventiva e corretiva de maquinário pesado, Automação de linhas de produção, Fornecimento de insumos industriais.',
     tone: 'Corporativo B2B, sério, focado em alta produtividade, escalabilidade, mitigação de riscos e robustez operacional.',
+    momentoLabel: 'Qual a necessidade da sua operação industrial no momento?',
+    momentoOptions: [
+      { label: 'Fabricação de Peças / Insumos sob Medida', value: 'fabricacao-pecas' },
+      { label: 'Manutenção de Maquinário ou Equipamentos', value: 'manutencao-maquinario' },
+      { label: 'Automação ou Modernização de Linha de Produção', value: 'automacao-producao' },
+      { label: 'Outra demanda corporativa B2B', value: 'outros' }
+    ]
   },
   clinica_veterinaria: {
     name: 'Clínica Veterinária',
@@ -44,6 +72,13 @@ const NICHE_DATA = {
     cta: 'Agendar Consulta Veterinária',
     services: 'Consultas clínicas completas, Vacinação e vermifugação protocolar, Cirurgias complexas e internação monitorada 24 horas, Exames laboratoriais e de imagem modernos para pets.',
     tone: 'Acolhedor, altamente empático, carinhoso, transmitindo absoluta confiança e tranquilidade aos tutores.',
+    momentoLabel: 'Como podemos ajudar o seu pet no momento?',
+    momentoOptions: [
+      { label: 'Consulta de Rotina / Vacinação', value: 'consulta-rotina' },
+      { label: 'Atendimento de Urgência / Pronto Socorro', value: 'atendimento-urgencia' },
+      { label: 'Cirurgia, Internação ou Exames', value: 'cirurgia-exames' },
+      { label: 'Outro cuidado com o pet', value: 'outros' }
+    ]
   },
   clinica_medica: {
     name: 'Clínica Médica',
@@ -53,6 +88,13 @@ const NICHE_DATA = {
     cta: 'Agendar minha Consulta',
     services: 'Consultas atenciosas com médicos especialistas, Check-up preventivo completo, Acompanhamento contínuo de doenças crônicas, Pequenos procedimentos ambulatoriais com conforto.',
     tone: 'Estritamente confiável, ético, humanizado, calmo e extremamente profissional e reconfortante.',
+    momentoLabel: 'Qual o tipo de atendimento médico você busca no momento?',
+    momentoOptions: [
+      { label: 'Agendar Consulta com Especialista', value: 'agendamento-consulta' },
+      { label: 'Check-up Geral Preventivo', value: 'checkup-preventivo' },
+      { label: 'Acompanhamento de Saúde Contínuo', value: 'acompanhamento-continuo' },
+      { label: 'Outra necessidade de saúde', value: 'outros' }
+    ]
   },
   clinica_exames: {
     name: 'Laboratório / Clínica de Exames',
@@ -62,6 +104,13 @@ const NICHE_DATA = {
     cta: 'Agendar Exame Agora',
     services: 'Exames laboratoriais de rotina e urgência, Diagnóstico por imagem de alta definição (Raio-X, Ultrassom, Tomografia), Eletrocardiograma, Coleta domiciliar com hora marcada.',
     tone: 'Direto, ágil, asséptico, focado em precisão tecnológica absoluta e facilidade para o paciente.',
+    momentoLabel: 'Qual exame ou serviço você precisa agendar no momento?',
+    momentoOptions: [
+      { label: 'Exames Laboratoriais (Sangue, Urina, etc.)', value: 'exames-laboratoriais' },
+      { label: 'Exames de Imagem (Ultrassom, Raio-X, Tomografia)', value: 'exames-imagem' },
+      { label: 'Coleta Domiciliar com Hora Marcada', value: 'coleta-domiciliar' },
+      { label: 'Outro exame ou orçamento', value: 'outros' }
+    ]
   },
   clinica_odontologica: {
     name: 'Clínica Odontológica',
@@ -71,6 +120,13 @@ const NICHE_DATA = {
     cta: 'Agendar Avaliação Odontológica',
     services: 'Lentes de contato dental em porcelana pura, Implantes dentários de carga imediata, Ortodontia invisível avançada, Clareamento a laser e profilaxia completa.',
     tone: 'Otimista, focado na estética e auto-estima, impecavelmente higiênico, indolor e extremamente acolhedor.',
+    momentoLabel: 'Qual o seu objetivo com o seu sorriso no momento?',
+    momentoOptions: [
+      { label: 'Avaliação Geral / Profilaxia e Limpeza', value: 'avaliacao-limpeza' },
+      { label: 'Estética Dental (Lentes de Contato / Clareamento)', value: 'estetica-dental' },
+      { label: 'Implantes Dentários ou Alinhadores Invisíveis', value: 'implantes-ortodontia' },
+      { label: 'Outro tratamento bucal', value: 'outros' }
+    ]
   },
   barbearia: {
     name: 'Barbearia',
@@ -80,6 +136,13 @@ const NICHE_DATA = {
     cta: 'Reservar meu Horário VIP',
     services: 'Corte degradê perfeito e tesoura clássico, Barboterapia relaxante com toalha quente e ozônio, Pigmentação natural de barba e cabelo, Hidratação capilar masculina premium.',
     tone: 'Descontraído, fortemente masculino, moderno, imponente e altamente convidativo.',
+    momentoLabel: 'Qual serviço você deseja agendar no momento?',
+    momentoOptions: [
+      { label: 'Corte de Cabelo (Degradê / Clássico)', value: 'corte-cabelo' },
+      { label: 'Barboterapia e Alinhamento de Barba', value: 'barboterapia-barba' },
+      { label: 'Combo VIP Cabelo + Barba', value: 'combo-vip' },
+      { label: 'Outro serviço de barbearia', value: 'outros' }
+    ]
   },
   salao_beleza: {
     name: 'Salão de Beleza / Estética',
@@ -89,6 +152,13 @@ const NICHE_DATA = {
     cta: 'Agendar meu Momento de Beleza',
     services: 'Mechas, luzes e colorimetria avançada sem danos, Cortes baseados em visagismo, Penteados e maquiagem profissional de longa duração, Terapias capilares e cronograma intenso.',
     tone: 'Elegante, empoderador, focado na elevação da autoestima, luxo acessível e tendências de moda.',
+    momentoLabel: 'Qual o seu objetivo de beleza no momento?',
+    momentoOptions: [
+      { label: 'Transformação de Cabelo (Corte / Mechas / Colorimetria)', value: 'transformacao-cabelo' },
+      { label: 'Tratamentos e Terapias Capilares Intensivas', value: 'tratamento-capilar' },
+      { label: 'Maquiagem e Penteado Profissional para Evento', value: 'make-penteado' },
+      { label: 'Outro serviço de estética', value: 'outros' }
+    ]
   },
   mecanica: {
     name: 'Oficina Mecânica / Auto Center',
@@ -98,6 +168,13 @@ const NICHE_DATA = {
     cta: 'Solicitar Orçamento no WhatsApp',
     services: 'Revisão preventiva completa por quilometragem, Troca de óleo de alta performance e filtros, Manutenção avançada de freios e suspensão, Diagnóstico eletrônico de injeção complexo.',
     tone: 'Extremamente prático, honesto, direto ao ponto, focado na resolução rápida de problemas mecânicos e segurança familiar.',
+    momentoLabel: 'Qual a necessidade do seu veículo no momento?',
+    momentoOptions: [
+      { label: 'Revisão Preventiva por Quilometragem / Troca de Óleo', value: 'revisao-preventiva' },
+      { label: 'Manutenção de Freios, Suspensão ou Motor', value: 'manutencao-mecanica' },
+      { label: 'Diagnóstico Eletrônico de Injeção e Barulhos', value: 'diagnostico-eletronico' },
+      { label: 'Outro serviço automotivo', value: 'outros' }
+    ]
   },
   outro: {
     name: 'Outro Segmento (Personalizado)',
@@ -106,7 +183,7 @@ const NICHE_DATA = {
     subheadline: 'IA DEVE DEFINIR SUBHEADLINE DETALHADA E CONVERSIVA BASEADA NO NICHO',
     cta: 'IA DEVE DEFINIR CTA FORTE',
     services: 'IA DEVE CRIAR 4 SERVIÇOS/DIFERENCIAIS REAIS BASEADOS NO NICHO',
-    tone: 'IA DEVE ADOTAR O TOM DE VOZ PERFEITO PARA ESTE NICHO ESPECÍFICO.',
+    tone: 'IA DEVE ADOTAR O TOM DE VOZ PERFEITO PARA ESTE NICHO ESPECÍFICO.'
   }
 };
 

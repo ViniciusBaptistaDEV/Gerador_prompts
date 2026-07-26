@@ -75,14 +75,29 @@ export default function useAppState() {
     const niche = NICHE_DATA[formData.sector] || NICHE_DATA.outro;
     const specificNicheName = isCustom ? formData.customSector.trim() : niche.name;
 
-    const finalColors = formData.customColors.trim() !== '' ? formData.customColors : (isCustom ? 'A IA deve escolher uma paleta premium, moderna e condizente com a área de atuação informada (fornecer os códigos HEX)' : niche.colors);
+    const finalColors = formData.customColors.trim() !== '' ? formData.customColors : (isCustom ? 'A IA deve escolher uma paleta premium, moderníssima, futurista e condizente com a área de atuação informada (fornecer os códigos HEX em variáveis CSS)' : niche.colors);
     const finalDiffs = formData.differentiators.trim() !== '' ? formData.differentiators : (isCustom ? 'A IA deve listar 4 diferenciais ou serviços reais e atrativos baseados na área de atuação informada' : niche.services);
 
     const finalWhatsapp = formData.whatsapp.trim() !== '' ? formData.whatsapp : '(14) 99999-8888';
     const cleanWaNumber = finalWhatsapp.replace(/\D/g, '');
 
-    let promptText = `Atue como um Desenvolvedor Front-end Senior e Especialista em CRO (Otimização de Conversão) e Web Design Premium.
-Seu objetivo é gerar o código COMPLETO, DEFINITIVO e FUNCIONAL de uma Landing Page focada em alta conversão.
+    // Construção dinâmica das orientações do campo 'momento' (Select do Formulário)
+    let momentoInstructions = '';
+    if (!isCustom && niche.momentoOptions) {
+      const optionsFormatted = niche.momentoOptions
+        .map(opt => `     <option value="${opt.value}">${opt.label}</option>`)
+        .join('\n');
+      momentoInstructions = `Label da Pergunta: "${niche.momentoLabel}"
+     Options HTML e Values exatos a serem utilizados (relacionados a ${specificNicheName}):
+     <option value="" disabled>Selecione uma opção...</option>
+${optionsFormatted}`;
+    } else {
+      momentoInstructions = `Label da Pergunta: A IA deve criar uma pergunta profissional altamente relevante para o segmento do cliente "${specificNicheName}" (ex: "Qual a sua principal necessidade no momento?").
+     Options HTML e Values exatos: A IA deve gerar de 4 a 5 opções de resposta 100% alinhadas ao segmento "${specificNicheName}", onde o atributo 'value' de cada option DEVE ser um slug legível em minúsculas separado por hífen (ex: value="consulta-urgente", value="orcamento-projeto", etc.) e o texto do option deve ser claro e profissional.`;
+    }
+
+    let promptText = `Atue como um Desenvolvedor Front-end Senior e Especialista em CRO (Otimização de Conversão) e Web Design Ultra Premium, Futurista e Tecnológico.
+Seu objetivo é gerar o código COMPLETO, DEFINITIVO e FUNCIONAL de uma Landing Page focada em alta conversão e estética visual impressionante.
 
 O código deve ser escrito em React, para um projeto iniciado com os comandos abaixo:
 - npm create vite@latest nome-projeto -- --template react
@@ -92,68 +107,73 @@ O código deve ser escrito em React, para um projeto iniciado com os comandos ab
 
 Você tem total liberdade para instalar e utilizar via npm quaisquer bibliotecas adicionais que julgar necessárias para entregar o melhor resultado possível (por exemplo react-router-dom, axios, bibliotecas de máscara de input, animação, formulários, etc). Execute os comandos de instalação necessários normalmente, sem se restringir a uma lista fixa de pacotes.
 
+REGRAS DE ESTILIZAÇÃO E DESIGN (MUITO IMPORTANTE - SEM TAILWIND):
+1. É RIGOROSAMENTE PROIBIDO O USO DO TAILWIND CSS. Não utilize Tailwind sob hipótese alguma.
+2. Escreva todo o estilo utilizando Vanilla CSS puro (arquivos .css modulares por componente ou integrados), estruturado com Variáveis CSS (:root), Flexbox, Grid, e animações com keyframes ou \`framer-motion\`.
+3. ESTÉTICA PREMIUM, FUTURISTA E TECNOLÓGICA: O site DEVE ter o visual de um produto web de altíssimo nível. Utilize paleta de cores moderna, efeitos de glassmorphism (vidro fosco com backdrop-filter), bordas elegantes com brilho sutil (glow), gradientes fluidos, micro-interações ao passar o mouse (hover) e animações de scroll reveal com \`framer-motion\`.
+
 REGRAS DE ORGANIZAÇÃO DE CÓDIGO:
-1. Estruture o projeto em múltiplos componentes e arquivos sempre que isso deixar o código mais organizado e profissional (ex: src/components/Hero.jsx, src/components/Diferenciais.jsx, src/components/Servicos.jsx, src/components/Depoimentos.jsx, src/components/Contato.jsx, src/components/Footer.jsx, importados no App.jsx). Não é obrigatório concentrar tudo em um único arquivo.
+1. Estruture o projeto em múltiplos componentes e arquivos sempre que isso deixar o código mais organizado e profissional (ex: src/components/Hero.jsx, src/components/Diferenciais.jsx, src/components/Servicos.jsx, src/components/Autoridade.jsx, src/components/Contato.jsx, src/components/Footer.jsx, importados no App.jsx). Não é obrigatório concentrar tudo em um único arquivo.
 2. Use fetch nativo ou uma biblioteca HTTP de sua preferência para requisições.
 3. Para ícones, utilize \`lucide-react\` como base, podendo complementar com outras bibliotecas se necessário.
-4. Para animações, micro-interações, efeitos glassmorphism e scroll reveal, utilize \`framer-motion\`. O design deve ser altamente futurista, fluido e premium.
+4. Para animações, micro-interações, transições de entrada e efeitos visuais, utilize obrigatoriamente \`framer-motion\`.
 
 REGRAS DE QUALIDADE DE COPY E CONTEÚDO (MUITO IMPORTANTE):
-1. PROIBIDO usar placeholders textuais como "[Insira seu texto]", "[Cor]", "Lorem Ipsum" ou enviar instruções de como eu devo montar a página.
+1. PROIBIDO usar placeholders textuais como "[Insira seu texto]", "[Cor]", "Lorem Ipsum" ou enviar instruções de como eu devo montar a página. Os placeholders precisam combinar com a página e com o ramo de atuação do cliente, sendo extremamente profissional.
 2. PROIBIDO usar títulos em negrito (usando asteriscos duplos) nas suas explicações.
-3. Entregue o código completo e funcional do projeto, podendo estruturar em múltiplos componentes/arquivos como descrito acima. Não perca tempo com explicações longas em texto.
-4. Escreva todos os textos da página de forma DEFINITIVA, persuasiva, focada em conversão e alinhada ao tom de voz da área de atuação.
+3. PROIBIDO CRIAR DEPOIMENTOS FALSOS OU CLIENTES FICTÍCIOS. Todos os dados, métricas e textos de autoridade e prova social devem ser reais e 100% relacionados à empresa ${formData.companyName} e ao seu segmento.
+4. Entregue o código completo e funcional do projeto, podendo estruturar em múltiplos componentes/arquivos como descrito acima. Não perca tempo com explicações longas em texto.
+5. Escreva todos os textos da página de forma DEFINITIVA, persuasiva, focada em conversão e alinhada ao tom de voz da área de atuação.
 
 --- DADOS DA EMPRESA E IDENTIDADE VISUAL ---
 Nicho / Área de Atuação: ${specificNicheName}
 Nome da Empresa: ${formData.companyName}
-Cores Exatas a serem aplicadas (use os hex codes): ${finalColors}
+Cores Exatas a serem aplicadas (use os hex codes em variáveis CSS): ${finalColors}
 Tom de Voz do Copywriting: ${isCustom ? 'A IA deve adotar o tom de voz perfeito, profissional e persuasivo para este nicho específico.' : niche.tone} Mantenha todos os textos do site neste tom exato.
 Telefone/WhatsApp: ${finalWhatsapp}
 Endereço Completo: ${formData.address}
 Horário de Atendimento: ${formData.hours}
 
---- ESTRUTURA OBRIGATÓRIA DA PÁGINA (MOBILE-FIRST) ---
-A página deverá ter as seguintes seções:
+--- ESTRUTURA OBRIGATÓRIA DA PÁGINA (MOBILE-FIRST, FUTURISTA & ULTRA PREMIUM) ---
+A página deverá ter as seguintes seções com animações framer-motion:
 
-Seção 1: Hero Section (Dobra principal de impacto)
+Seção 1: Hero Section (Dobra principal futurista de alto impacto)
 - Headline: ${isCustom ? 'Crie uma headline de alto impacto baseada no nicho informado.' : niche.headline}
 - Subheadline: ${isCustom ? 'Crie uma subheadline persuasiva e focada em resultados baseada no nicho.' : niche.subheadline}
-- Call to Action (CTA): Botão grande e pulsante (${isCustom ? 'Crie o texto do CTA' : `com o texto "${niche.cta}"`}). Este botão deve levar para o link: https://wa.me/55${cleanWaNumber}
-- Visual: Fundo elegante, possivelmente com texturas sutis ou gradientes premium usando framer-motion para animações de fade-up ao carregar.
+- Call to Action (CTA): Botão grande, pulsante e tecnológico (${isCustom ? 'Crie o texto do CTA' : `com o texto "${niche.cta}"`}). Este botão deve levar para o link: https://wa.me/55${cleanWaNumber}
+- Visual: Fundo futurista escuro/elegante, gradientes fluidos, glassmorphism e animações suaves de entrada com framer-motion.
 
 Seção 2: Sobre / Diferenciais
 - Apresente 3 a 4 cards de diferenciais baseados nos seguintes pontos fortes: ${finalDiffs}. Escreva os textos finais.
 - Cada card DEVE ter um ícone representativo do \`lucide-react\`.
-- Efeito de hover: transições suaves e sombras profundas.
+- Efeito de hover: transições suaves com brilho (glow), elevação dos cards e sombras profundas.
 
 Seção 3: Serviços Principais
-- Detalhe de forma comercial e atrativa os serviços. Crie layouts em grid ilustrados com ícones.
+- Detalhe de forma comercial, tecnológica e atrativa os serviços prestados pela ${formData.companyName}. Crie layouts em grid com cards estilizados e ícones do lucide-react.
 
-Seção 4: Prova Social / Depoimentos
-- Escreva 3 depoimentos fictícios, porém extremamente realistas, profissionais e definitivos de clientes elogiando a ${formData.companyName}.
-- Inclua nomes de clientes e adicione ícones de estrelas.
+Seção 4: Prova Social & Autoridade Real (SEM DEPOIMENTOS FALSOS)
+- ATENÇÃO: É PROIBIDO CRIAR DEPOIMENTOS FALSOS OU CLIENTES FICTÍCIOS.
+- Crie uma seção focada em Autoridade, Números de Impacto e Pilares de Confiança da ${formData.companyName}.
+- Exiba estatísticas/métricas reais do segmento (ex: anos de experiência, precisão no atendimento, rigor técnico, garantias ou selos de excelência).
+- Apresente motivos concretos pelos quais o cliente deve escolher a ${formData.companyName} em relação aos concorrentes.
 
 Seção 5: Contato e Localização
 - Exiba o Endereço (${formData.address}) e o Horário (${formData.hours}).
-- Integre um iframe real do Google Maps utilizando este endereço. Coloque o width 100% e height 300 ou 400.
+- Integre um iframe real do Google Maps utilizando este endereço. Coloque width 100% e height 350px ou 400px com bordas arredondadas e estética condizente.
 `;
 
     if (formData.pageType === 'completa') {
       promptText += `
-ALERTA MÁXIMO: IMPLEMENTAÇÃO DE FORMULÁRIO COM WEBHOOK ESTRITO
+ALERTA MÁXIMO: IMPLEMENTAÇÃO DE FORMULÁRIO COM WEBHOOK ESTRITO E RELEVANTE AO CLIENTE
 - Nesta seção de Contato, crie um Formulário de Contato completo com visual futurista e glassmorphism.
 - O formulário DEVE ter EXATAMENTE os seguintes campos:
   1. Nome Completo (input text, required)
   2. E-mail (input email, required)
   3. WhatsApp (input text, required)
-  4. Um campo SELECT OBRIGATÓRIO (dropdown) onde o 'name' e o 'id' devem ser "momento". A label deve ser: "Que tipo de solução faz mais sentido para o seu negócio hoje?". Os options HTML DEVEM ser RIGOROSAMENTE estes (use os exatos values abaixo):
-     <option value="" disabled>Selecione uma opção...</option>
-     <option value="presenca-digital">Quero fortalecer minha presença online</option>
-     <option value="captacao-leads">Quero gerar mais leads e contatos</option>
-     <option value="leads-plus">Quero automatizar processos e receber leads com mais velocidade</option>
-     <option value="leads-plus-premium">Quero uma solução completa com IA e automação</option>
-     <option value="outros">Outro objetivo</option>
+  4. Um campo SELECT OBRIGATÓRIO (dropdown) onde o 'name' e o 'id' devem ser "momento".
+     As especificações deste campo 'momento' DEVEM SER RIGOROSAMENTE PERSONALIZADAS PARA O NICHO DO CLIENTE (${specificNicheName}):
+     ${momentoInstructions}
+
   5. Mensagem (textarea, required)
 
 - No evento onSubmit (handleSubmit), previna o comportamento padrão e envie os dados (via fetch nativo ou biblioteca HTTP de sua escolha, método POST) para a EXATA URL: ${formData.webhookUrl || 'COLOQUE_URL_DO_WEBHOOK_AQUI'}
@@ -168,8 +188,9 @@ ALERTA MÁXIMO: IMPLEMENTAÇÃO DE FORMULÁRIO COM WEBHOOK ESTRITO
   "data_envio": new Date().toLocaleString('pt-BR'),
   "data_iso": new Date().toISOString()
 }
-- Implemente estado de 'loading' no botão de submit.
-- Após sucesso (resposta ok da requisição), exiba uma mensagem de sucesso na tela e limpe todos os campos. Trate erros exibindo mensagem de falha.
+- O valor enviado na chave "momento" será o slug do option selecionado no dropdown, garantindo que o webhook receba a opção específica relevante para o cliente (${specificNicheName}).
+- Implemente estado de 'loading' com spinner/animação no botão de submit.
+- Após sucesso (resposta ok da requisição), exiba uma mensagem de sucesso elegante na tela e limpe todos os campos. Trate erros exibindo mensagem de falha.
 `;
     } else {
       promptText += `
@@ -184,7 +205,7 @@ Seção 6: Footer Premium
 --- REQUISITOS TÉCNICOS GERAIS DE SEO E ESTRUTURA ---
 - Garanta hierarquia correta de headings (Apenas um H1 no topo, H2 nas seções, H3 nos cards).
 - Use tags semânticas (<main>, <section>, <article>, <nav>, <footer>).
-- O design deve ser totalmente responsivo (mobile-first).
+- O design deve ser totalmente responsivo (mobile-first), futurista, interativo e SEM TAILWIND CSS.
 - Injete diretamente no corpo do componente a seguinte tag <script type="application/ld+json"> para SEO LocalBusiness, exatamente com os dados abaixo:
 {
   "@context": "https://schema.org",
@@ -195,10 +216,37 @@ Seção 6: Footer Premium
   "openingHours": "${formData.hours}"
 }
 
-Lembre-se: Entregue o código completo e funcional do projeto (podendo organizar em múltiplos componentes e arquivos), sem explicações longas em texto e NENHUM texto fictício de placeholder. Escreva a copy inteira, real e definitiva em todos os arquivos!
+Lembre-se: Entregue o código completo e funcional do projeto em React + Vanilla CSS (SEM TAILWIND), sem explicações longas em texto, sem depoimentos falsos e NENHUM texto fictício de placeholder. Escreva a copy inteira, real, futurista e definitiva em todos os arquivos!
 `;
 
     setGeneratedPrompt(promptText);
+
+    // Salvar automaticamente o projeto gerado no localStorage
+    const now = new Date();
+    const dateFormatted = now.toLocaleDateString('pt-BR') + ' às ' + now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+    const pageTypeLabel = formData.pageType === 'completa' ? 'Formulário Webhook' : 'Lead Direto (WhatsApp)';
+
+    const newProject = {
+      id: Date.now().toString(),
+      name: formData.companyName,
+      sector: specificNicheName,
+      pageType: pageTypeLabel,
+      date: dateFormatted,
+      prompt: promptText,
+      data: { ...formData }
+    };
+
+    setSavedProjects(prev => {
+      // Evita duplicatas exatas mantendo o mais recente no topo
+      const filtered = prev.filter(p => p.name.toLowerCase() !== formData.companyName.toLowerCase());
+      const updated = [newProject, ...filtered];
+      localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
+      return updated;
+    });
+
+    // Zerar os campos do formulário para preencher um novo prompt
+    setFormData(initialFormData);
+
     setActiveTab('prompt');
   }, [formData]);
 
@@ -218,22 +266,8 @@ Lembre-se: Entregue o código completo e funcional do projeto (podendo organizar
       alert("Gere um prompt primeiro para poder salvar o projeto.");
       return;
     }
-
-    const nicheName = formData.sector === 'outro' ? (formData.customSector || 'Personalizado') : (NICHE_DATA[formData.sector]?.name || 'Outro');
-
-    const newProject = {
-      id: Date.now().toString(),
-      name: formData.companyName,
-      sector: nicheName,
-      date: new Date().toLocaleDateString('pt-BR'),
-      prompt: generatedPrompt,
-      data: formData
-    };
-    const updated = [newProject, ...savedProjects];
-    setSavedProjects(updated);
-    localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
-    alert('Projeto salvo com sucesso!');
-  }, [formData, generatedPrompt, savedProjects]);
+    alert('Projeto já armazenado com sucesso no seu histórico de projetos!');
+  }, [formData.companyName, generatedPrompt]);
 
   const loadProject = useCallback((project) => {
     setFormData(project.data);
@@ -243,11 +277,21 @@ Lembre-se: Entregue o código completo e funcional do projeto (podendo organizar
 
   const deleteProject = useCallback((id) => {
     if (window.confirm('Tem certeza que deseja excluir este projeto salvo?')) {
-      const updated = savedProjects.filter(p => p.id !== id);
-      setSavedProjects(updated);
-      localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
+      setSavedProjects(prev => {
+        const updated = prev.filter(p => p.id !== id);
+        localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
+        return updated;
+      });
     }
-  }, [savedProjects]);
+  }, []);
+
+  const updateProject = useCallback((id, updatedFields) => {
+    setSavedProjects(prev => {
+      const updated = prev.map(p => (p.id === id ? { ...p, ...updatedFields } : p));
+      localStorage.setItem(STORAGE_PROJECTS_KEY, JSON.stringify(updated));
+      return updated;
+    });
+  }, []);
 
   return {
     // State
@@ -268,5 +312,6 @@ Lembre-se: Entregue o código completo e funcional do projeto (podendo organizar
     handleSaveProject,
     loadProject,
     deleteProject,
+    updateProject,
   };
 }

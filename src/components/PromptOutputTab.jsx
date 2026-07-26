@@ -1,11 +1,10 @@
-import { Code, Copy, CheckCircle2, Save, Cpu } from 'lucide-react';
+import { Code, Copy, CheckCircle2, Cpu } from 'lucide-react';
 import './PromptOutputTab.css';
 
 export default function PromptOutputTab({
   isDark,
   generatedPrompt,
   handleCopy,
-  handleSaveProject,
   copyStatus
 }) {
   return (
@@ -18,12 +17,6 @@ export default function PromptOutputTab({
           <p className="prompt-output__subtitle">Copie o conteúdo abaixo e cole diretamente na sua IA (Claude, GPT, v0).</p>
         </div>
         <div className="prompt-output__actions">
-          <button
-            onClick={handleSaveProject}
-            className={`prompt-output__btn ${isDark ? 'prompt-output__btn--save-dark' : 'prompt-output__btn--save-light'}`}
-          >
-            <Save style={{ width: '1rem', height: '1rem' }} /> Salvar
-          </button>
           <button
             onClick={handleCopy}
             className={`prompt-output__btn ${copyStatus ? 'prompt-output__btn--copy-success' : 'prompt-output__btn--copy-default'}`}
