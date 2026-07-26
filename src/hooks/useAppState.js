@@ -44,15 +44,10 @@ export default function useAppState() {
   const [copyStatus, setCopyStatus] = useState(false);
   const [savedProjects, setSavedProjects] = useState(loadSavedProjects);
   const [generatedPrompt, setGeneratedPrompt] = useState('');
-  const [mounted, setMounted] = useState(false);
+  const [mounted] = useState(true);
   const [formData, setFormData] = useState(initialFormData);
 
   const isDark = theme === 'dark';
-
-  // Set mounted after first render
-  setTimeout(() => {
-    if (!mounted) setMounted(true);
-  }, 50);
 
   const toggleTheme = useCallback(() => {
     const next = isDark ? 'light' : 'dark';
