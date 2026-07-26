@@ -60,7 +60,7 @@ function App() {
       />
 
       {/* Main Content Area */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
+      <main className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-6 sm:py-8 lg:py-10 mx-auto" style={{ maxWidth: '1280px' }}>
 
         {/* TAB: FORMULÁRIO */}
         {activeTab === 'form' && (

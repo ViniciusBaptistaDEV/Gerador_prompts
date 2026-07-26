@@ -26,3 +26,6 @@ dist-ssr
 # OS generated files
 .env
 gerador_de_prompts_landing_pages.tsx
+
+.vercel
+.env*

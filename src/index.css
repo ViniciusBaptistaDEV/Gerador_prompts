@@ -6,15 +6,37 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
   margin: 0;
   font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 #root {
   min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+/* Fluid typography via clamp */
+@media screen and (max-width: 360px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  html {
+    font-size: 18px;
+  }
 }
 
 /* Animações Tailwind-like para fade-in */
@@ -30,4 +52,11 @@ body {
 
 .animate-in {
   animation: fade-in 0.3s ease-out, slide-in-from-top-2 0.3s ease-out;
+}
+
+/* Melhorias de touch para mobile */
+@media (hover: none) and (pointer: coarse) {
+  input, select, textarea, button {
+    font-size: 16px !important;
+  }
 }

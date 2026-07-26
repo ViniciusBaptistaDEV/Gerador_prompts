@@ -15,21 +15,21 @@ export default function FormTab({
 }) {
   return (
     <div className={`rounded-2xl shadow-2xl border backdrop-blur-2xl overflow-hidden transition-all duration-500 ${panelBg} ${mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-      <div className="p-5 sm:p-8 lg:p-10">
-        <div className={`flex items-center justify-between mb-8 pb-6 border-b transition-colors duration-500 ${isDark ? 'border-white/10' : 'border-slate-200'}`}>
-          <div>
-            <h2 className={`text-2xl sm:text-3xl font-bold flex items-center gap-3 ${titleColor}`}>
-              <Globe className="text-cyan-400 w-7 h-7 sm:w-8 sm:h-8" />
-              Parâmetros do Cliente
+      <div className="p-4 sm:p-6 md:p-8 lg:p-10">
+        <div className={`flex items-center justify-between mb-6 sm:mb-8 pb-4 sm:pb-6 border-b transition-colors duration-500 ${isDark ? 'border-white/10' : 'border-slate-200'}`}>
+          <div className="min-w-0">
+            <h2 className={`text-xl sm:text-2xl lg:text-3xl font-bold flex items-center gap-2 sm:gap-3 ${titleColor}`}>
+              <Globe className="text-cyan-400 w-6 h-6 sm:w-7 sm:h-7 lg:w-8 lg:h-8 flex-shrink-0" />
+              <span className="truncate">Parâmetros do Cliente</span>
             </h2>
-            <p className={`mt-2 text-sm ${mutedText}`}>Preencha os dados abaixo para sintetizar a inteligência da Landing Page.</p>
+            <p className={`mt-1 sm:mt-2 text-xs sm:text-sm ${mutedText}`}>Preencha os dados abaixo para sintetizar a inteligência da Landing Page.</p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6 lg:gap-8">
 
           {/* Coluna 1 */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-5 lg:space-y-6">
             <div>
               <label className={`block text-sm font-medium mb-2 ${labelColor}`}>
                 Setor / Área de Atuação <span className="text-cyan-400">*</span>
@@ -116,7 +116,7 @@ export default function FormTab({
           </div>
 
           {/* Coluna 2 */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-5 lg:space-y-6">
             <div>
               <label className={`block text-sm font-medium mb-2 ${labelColor}`}>
                 Horário de Atendimento <span className="text-cyan-400">*</span>
@@ -162,11 +162,11 @@ export default function FormTab({
         </div>
 
         {/* Seção de Tipo de Página */}
-        <div className={`mt-10 pt-8 border-t transition-colors duration-500 ${isDark ? 'border-white/10' : 'border-slate-200'}`}>
-          <label className={`block text-lg font-bold mb-4 ${titleColor}`}>
+        <div className={`mt-6 sm:mt-8 lg:mt-10 pt-6 sm:pt-8 border-t transition-colors duration-500 ${isDark ? 'border-white/10' : 'border-slate-200'}`}>
+          <label className={`block text-base sm:text-lg font-bold mb-3 sm:mb-4 ${titleColor}`}>
             Arquitetura do Projeto
           </label>
-          <div className="flex flex-col sm:flex-row gap-5 mb-6">
+          <div className="flex flex-col sm:flex-row gap-4 sm:gap-5 mb-6">
 
             <label className="flex-1 relative group cursor-pointer">
               <input
@@ -177,14 +177,14 @@ export default function FormTab({
                 onChange={handleInputChange}
                 className="peer sr-only"
               />
-              <div className={`h-full border rounded-xl p-5 transition-all peer-checked:border-cyan-500 peer-checked:bg-cyan-500/10 peer-checked:shadow-[0_0_20px_rgba(6,182,212,0.15)] ${cardBorder}`}>
+              <div className={`h-full border rounded-xl p-4 sm:p-5 transition-all peer-checked:border-cyan-500 peer-checked:bg-cyan-500/10 peer-checked:shadow-[0_0_20px_rgba(6,182,212,0.15)] ${cardBorder}`}>
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-5 h-5 rounded-full border-2 border-slate-500 peer-checked:border-cyan-500 flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full border-2 border-slate-500 peer-checked:border-cyan-500 flex items-center justify-center flex-shrink-0">
                     {formData.pageType === 'simples' && <div className="w-2.5 h-2.5 bg-cyan-500 rounded-full"></div>}
                   </div>
-                  <span className={`font-bold text-lg ${titleColor}`}>Lead Direto (Simples)</span>
+                  <span className={`font-bold text-base sm:text-lg ${titleColor}`}>Lead Direto (Simples)</span>
                 </div>
-                <p className={`text-sm ml-8 ${mutedText}`}>Foco total no CTA de WhatsApp. Sem formulários complexos. Ideal para serviços rápidos.</p>
+                <p className={`text-xs sm:text-sm ml-8 ${mutedText}`}>Foco total no CTA de WhatsApp. Sem formulários complexos. Ideal para serviços rápidos.</p>
               </div>
             </label>
 
@@ -197,24 +197,24 @@ export default function FormTab({
                 onChange={handleInputChange}
                 className="peer sr-only"
               />
-              <div className={`h-full border rounded-xl p-5 transition-all peer-checked:border-indigo-500 peer-checked:bg-indigo-500/10 peer-checked:shadow-[0_0_20px_rgba(99,102,241,0.15)] ${cardBorder}`}>
+              <div className={`h-full border rounded-xl p-4 sm:p-5 transition-all peer-checked:border-indigo-500 peer-checked:bg-indigo-500/10 peer-checked:shadow-[0_0_20px_rgba(99,102,241,0.15)] ${cardBorder}`}>
                 <div className="flex items-center gap-3 mb-2">
-                  <div className="w-5 h-5 rounded-full border-2 border-slate-500 peer-checked:border-indigo-500 flex items-center justify-center">
+                  <div className="w-5 h-5 rounded-full border-2 border-slate-500 peer-checked:border-indigo-500 flex items-center justify-center flex-shrink-0">
                     {formData.pageType === 'completa' && <div className="w-2.5 h-2.5 bg-indigo-500 rounded-full"></div>}
                   </div>
-                  <span className={`font-bold text-lg flex items-center gap-2 ${titleColor}`}>
+                  <span className={`font-bold text-base sm:text-lg flex items-center gap-2 ${titleColor}`}>
                     Formulário de Automação
-                    <Sparkles className="w-4 h-4 text-indigo-400" />
+                    <Sparkles className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-indigo-400 flex-shrink-0" />
                   </span>
                 </div>
-                <p className={`text-sm ml-8 ${mutedText}`}>Inclui formulário avançado integrado a um webhook (n8n/Make) para captura de leads detalhada.</p>
+                <p className={`text-xs sm:text-sm ml-8 ${mutedText}`}>Inclui formulário avançado integrado a um webhook (n8n/Make) para captura de leads detalhada.</p>
               </div>
             </label>
 
           </div>
 
           {formData.pageType === 'completa' && (
-            <div className={`rounded-xl p-6 border space-y-5 animate-in fade-in slide-in-from-top-2 transition-colors duration-500 ${isDark ? 'bg-slate-950/80 border-indigo-500/30' : 'bg-indigo-50 border-indigo-200'}`}>
+            <div className={`rounded-xl p-4 sm:p-5 lg:p-6 border space-y-4 sm:space-y-5 animate-in fade-in slide-in-from-top-2 transition-colors duration-500 ${isDark ? 'bg-slate-950/80 border-indigo-500/30' : 'bg-indigo-50 border-indigo-200'}`}>
               <div>
                 <label className={`block text-sm font-medium mb-2 ${labelColor}`}>
                   URL do Webhook (n8n, Make, Zapier) <span className="text-indigo-400">*</span>
@@ -229,8 +229,8 @@ export default function FormTab({
                 />
               </div>
 
-              <div className={`flex items-start gap-4 p-5 rounded-xl border transition-colors duration-500 ${isDark ? 'bg-indigo-950/30 border-indigo-500/20' : 'bg-white border-indigo-200'}`}>
-                <Cpu className="w-6 h-6 text-indigo-400 flex-shrink-0 mt-0.5" />
+              <div className={`flex items-start gap-3 sm:gap-4 p-4 sm:p-5 rounded-xl border transition-colors duration-500 ${isDark ? 'bg-indigo-950/30 border-indigo-500/20' : 'bg-white border-indigo-200'}`}>
+                <Cpu className="w-5 h-5 sm:w-6 sm:h-6 text-indigo-400 flex-shrink-0 mt-0.5" />
                 <div>
                   <p className="font-bold text-indigo-400 mb-2">Payload Rigoroso Ativado</p>
                   <p className={`text-sm leading-relaxed ${mutedText}`}>
@@ -254,12 +254,12 @@ export default function FormTab({
           )}
         </div>
 
-        <div className="mt-10">
+        <div className="mt-6 sm:mt-8 lg:mt-10">
           <button
             onClick={handleGenerate}
-            className="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-4 px-6 rounded-xl shadow-[0_0_25px_rgba(6,182,212,0.3)] hover:shadow-[0_0_35px_rgba(99,102,241,0.5)] transition-all duration-300 flex items-center justify-center gap-3 transform hover:-translate-y-1 active:translate-y-0 active:scale-[0.99]"
+            className="w-full bg-gradient-to-r from-cyan-600 to-indigo-600 hover:from-cyan-500 hover:to-indigo-500 text-white font-bold py-3.5 sm:py-4 px-5 sm:px-6 rounded-xl shadow-[0_0_25px_rgba(6,182,212,0.3)] hover:shadow-[0_0_35px_rgba(99,102,241,0.5)] transition-all duration-300 flex items-center justify-center gap-2 sm:gap-3 transform hover:-translate-y-1 active:translate-y-0 active:scale-[0.99] text-sm sm:text-base"
           >
-            <Rocket className="w-6 h-6" />
+            <Rocket className="w-5 h-5 sm:w-6 sm:h-6 flex-shrink-0" />
             Sintetizar Prompt Mestre
           </button>
         </div>
